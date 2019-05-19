@@ -115,7 +115,7 @@ Output:
         ]
     }
 ```
-However, this is cumbersome for an application stores its configurations which have considerable amount of parameters in each of them following complex hierachical structures..
+However, this is cumbersome for an application stores its configurations which have considerable amount of parameters in each of them following complex hierachical structures.
 
 #### ssm-get-jsonified can retrieve configurations for a given path prefix in JSON format while preserving it's hierachical structure.
 
