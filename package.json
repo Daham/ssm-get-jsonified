@@ -1,6 +1,6 @@
 {
     "name": "ssm-get-jsonified",
-    "version": "1.1.2",
+    "version": "1.1.3",
     "description": "This library is capable of reading any given hierachical path in AWS SSM and outputing it as a single json schema.",
     "main": "index.js",
     "scripts": {
