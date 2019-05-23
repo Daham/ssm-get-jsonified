@@ -131,7 +131,7 @@ To get database configurations in `/myApp/prod/dbConfigs`
 ```js
     const ssmJsonified = require('ssm-get-jsonified');
 
-    ssmJsonified('us-west-2', '/myApp/prod/dbConfig', function(configuration) {
+    ssmJsonified.ssmGetJsonifiedAsync('us-west-2', '/myApp/prod/dbConfig', function(configuration) {
       
         // Logic to process required configuration
 
@@ -152,7 +152,7 @@ To get database configurations in `/myApp/prod/salesforce`
 ```js
     const ssmJsonified = require('ssm-get-jsonified');
 
-    ssmJsonified('us-west-2', '/myApp/prod/salesforce', function(configuration) {
+    ssmJsonified.ssmGetJsonifiedAsync('us-west-2', '/myApp/prod/salesforce', function(configuration) {
       
         // Logic to process required configuration
 

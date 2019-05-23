@@ -1,0 +1,32 @@
+Arguments: 
+  /Users/dahamp/.nvm/versions/node/v8.12.0/bin/node /Users/dahamp/.nvm/versions/node/v8.12.0/bin/yarn install
+
+PATH: 
+  /Users/dahamp/.nvm/versions/node/v8.12.0/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/System/Library/Frameworks/Python.framework/Versions/3.7/bin/python3:/Users/dahamp/Documents/software/mongo/mongodb-osx-x86_64-4.0.9/bin:/Users/dahamp/Documents/software/mongo/mongodb-osx-x86_64-4.0.9/bin/mongod:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/mysql/bin:/user/local/mysql/support-files
+
+Yarn version: 
+  1.16.0
+
+Node version: 
+  8.12.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  SyntaxError: /Users/dahamp/Documents/private/projects/node-libraries/ssm-get-jsonified-repo/ssm-get-jsonified/package.json: Unexpected end of JSON input
+      at JSON.parse (<anonymous>)
+      at /Users/dahamp/.nvm/versions/node/v8.12.0/lib/node_modules/yarn/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/Users/dahamp/.nvm/versions/node/v8.12.0/lib/node_modules/yarn/lib/cli.js:304:30)
+      at /Users/dahamp/.nvm/versions/node/v8.12.0/lib/node_modules/yarn/lib/cli.js:315:13
+      at <anonymous>
+
+npm manifest: 
+  
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

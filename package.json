@@ -1,10 +1,14 @@
 {
     "name": "ssm-get-jsonified",
-    "version": "1.1.3",
+    "version": "1.2.0",
     "description": "This library is capable of reading any given hierachical path in AWS SSM and outputing it as a single json schema.",
-    "main": "index.js",
+    "main": "./dist/index.js",
     "scripts": {
-        "test": "jest"
+        "test": "jest --detectOpenHandles",
+        "start": "node ./bin/www",
+        "build": "yarn run clean && yarn install && gulp",
+        "build:prod": "yarn run clean && yarn install && gulp prod",
+        "clean": "rm -rf dist/"
     },
     "repository": {
         "type": "git",
@@ -18,12 +22,20 @@
         "ssm"
     ],
     "author": "Daham Pathiraja",
-    "license": "ISC",
+    "license": "MIT",
     "dependencies": {
-        "aws-sdk": "^2.458.0"
+        "aws-sdk": "^2.458.0",
+        "deasync": "^0.1.15",
+        "sync-rpc": "^1.3.4"
     },
     "devDependencies": {
+        "@babel/cli": "^7.4.3",
+        "@babel/core": "^7.4.3",
+        "@babel/preset-env": "^7.4.3",
         "aws-sdk-mock": "^4.4.0",
+        "gulp": "^3.9.1",
+        "gulp-babel": "^8.0.0",
+        "gulp-sourcemaps": "^2.6.5",
         "jest": "^24.8.0",
         "sinon": "^7.3.2"
     }

@@ -1,28 +1,23 @@
-var ssmReader = require('./ssmReader');
+var indexFile = require('../src/index');
+var ssmReader = require('../src/ssmReader');
 var testConstants = require('./testConstants');
-var AWS = require('aws-sdk-mock');
+//var AWS = require('aws-sdk-mock');
+const AWS = require('aws-sdk')
 var sinon = require('sinon');
 
 afterEach(() => {
-    AWS.restore('SSM', 'getParametersByPath');
+    //AWS.restore('SSM', 'getParametersByPath');
 });
 
-test('ssm getParametersByPath is called with necessary parameters', () => {
-    const getParametersByPathSpy = sinon.spy();
-    AWS.mock('SSM', 'getParametersByPath', getParametersByPathSpy);
-
-    ssmReader.ssmOutputToJson('us-west-2', '/any/given/path', (data) => {
-        expect(getParametersByPathSpy.calledOnceWith({ Path: '/any/given/path', Recursive: true, WithDecryption: true })).toBe(true);
-    })
-});
-
-test('gets parameters from ssm for a given path prefix of an root location in hierachical json format', () => {
-
-    AWS.mock('SSM', 'getParametersByPath', function(params, callback) {
-        callback(null, testConstants.hierachicalSSMOutputRoot);
+describe('ssmGetJsonifiedAsync', () => {
+    test('is called with necessary parameters', async() => {
+        const ssmOutputToJsonSpy = jest.spyOn(ssmReader, 'ssmOutputToJson');
+        await indexFile.ssmGetJsonifiedAsync('us-west-2', '/any/given/path');
+        expect(ssmOutputToJsonSpy).toHaveBeenCalledWith('us-west-2', '/any/given/path');
     });
 
-    ssmReader.ssmOutputToJson('us-west-2', '/', (data) => {
+    test('gets parameters from ssm for a given path prefix of an root location in hierachical json format', async() => {
+        const data = await indexFile.ssmGetJsonifiedAsync('us-west-2', '/')
         expect(typeof data).toEqual('object');
 
         // Validate simple property types.
@@ -36,16 +31,12 @@ test('gets parameters from ssm for a given path prefix of an root location in hi
         expect(typeof data.myApp.platformConfigs.salesforce.saml.sso.url).toEqual('string');
         expect(typeof data.myApp.platformConfigs.salesforce.sso.loginUrl).toEqual('string');
         expect(typeof data.myApp.platformConfigs.salesforce.sso.password).toEqual('string');
-    })
-});
 
-test('gets parameters from ssm for a given path prefix of a next to root location in hierachical json format', () => {
-
-    AWS.mock('SSM', 'getParametersByPath', function(params, callback) {
-        callback(null, testConstants.hierachicalSSMOutputNextToRoot);
     });
 
-    ssmReader.ssmOutputToJson('us-west-2', '/myApp', (data) => {
+    test('gets parameters from ssm for a given path prefix of a next to root location in hierachical json format', async() => {
+
+        const data = await indexFile.ssmGetJsonifiedAsync('us-west-2', '/myApp')
         expect(typeof data).toEqual('object');
 
         // Validate simple property types.
@@ -58,16 +49,12 @@ test('gets parameters from ssm for a given path prefix of a next to root locatio
         expect(typeof data.platformConfigs.salesforce.saml.sso.url).toEqual('string');
         expect(typeof data.platformConfigs.salesforce.sso.loginUrl).toEqual('string');
         expect(typeof data.platformConfigs.salesforce.sso.password).toEqual('string');
+
     })
-})
 
-test('gets parameters from ssm for a given path prefix of an intermediate location in hierachical json format', () => {
+    test('gets parameters from ssm for a given path prefix of an intermediate location in hierachical json format', async() => {
 
-    AWS.mock('SSM', 'getParametersByPath', function(params, callback) {
-        callback(null, testConstants.hierachicalSSMOutputModerate);
-    });
-
-    ssmReader.ssmOutputToJson('us-west-2', '/myApp/platformConfigs', (data) => {
+        const data = await indexFile.ssmGetJsonifiedAsync('us-west-2', '/myApp/platformConfigs')
         expect(typeof data).toEqual('object');
 
         // Validate simple property types.
@@ -79,15 +66,18 @@ test('gets parameters from ssm for a given path prefix of an intermediate locati
         expect(typeof data.salesforce.saml.sso.url).toEqual('string');
         expect(typeof data.salesforce.sso.loginUrl).toEqual('string');
         expect(typeof data.salesforce.sso.password).toEqual('string');
-    })
-});
 
-test('throws on ssm parameters retrieval', () => {
-    AWS.mock('SSM', 'getParametersByPath', function(params, callback) {
-        throw Error();
     });
 
-    expect(() => {
-        ssmReader.ssmOutputToJson('us-west-2', '/myApp/platformConfigs')
-    }).toThrow();
+    // test('throws on ssm parameters retrieval', () => {
+    //     const ssmOutputToJsonSpy = jest.spyOn(AWS.SSM, 'getParametersByPath').mockImplementation(() => {
+    //         throw new Error();
+    //     });
+
+    //     expect(ssmOutputToJsonSpy).toThrow();
+    // });
+});
+
+describe('ssmGetJsonifiedSync', () => {
+
 });
