@@ -14,15 +14,15 @@ const ssmGetJsonifiedAsync = (region, pathPrefix, callback) => {
                     reject(err);
                 })
         });
+    } else {
+        ssmReader.ssmOutputToJson(region, pathPrefix)
+            .then(data => {
+                return callback(null, jsonifier.hierachicalToJson(data, pathPrefix));
+            })
+            .catch(err => {
+                return callback(true, err);
+            })
     }
-
-    ssmReader.ssmOutputToJson(region, pathPrefix)
-        .then(data => {
-            return callback(null, jsonifier.hierachicalToJson(data, pathPrefix));
-        })
-        .catch(err => {
-            return callback(true, err);
-        })
 }
 
 const ssmGetJsonifiedSync = (region, pathPrefix) => {
