@@ -1,5 +1,9 @@
 # ssm-get-jsonified
 
+[![Build Status](https://travis-ci.com/Daham/ssm-get-jsonified.svg?branch=master)](https://travis-ci.com/Daham/ssm-get-jsonified.svg?branch=master) 
+[![Coverage Status](https://coveralls.io/repos/github/Daham/ssm-get-jsonified/badge.svg?branch=master)](https://coveralls.io/github/Daham/ssm-get-jsonified?branch=master)
+
+
 ## Table of Contents
 
 - [Problem](#problem)
@@ -243,6 +247,8 @@ ssmJsonified.ssmGetJsonifiedAsync('us-west-2', '/myApp/prod/salesforce')
 ```
 
 ### Fetch Configurations Synchronously
+
+#### Note: Executing synchronously is not reccommended as it blocks the call back loop expliciltly.
 
 To get database configurations in `/myApp/prod/dbConfigs`
 ```js
