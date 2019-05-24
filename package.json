@@ -8,7 +8,10 @@
         "start": "node ./bin/www",
         "build": "yarn run clean && yarn install && gulp",
         "build:prod": "yarn run clean && yarn install && gulp prod",
-        "clean": "rm -rf dist/"
+        "clean": "rm -rf dist/",
+        "coverage": "jest --coverage",
+        "eslint": "eslint 'src/**/*.js'",
+        "eslint-fix": "eslint 'src/**/*.js' --fix"
     },
     "repository": {
         "type": "git",
@@ -33,6 +36,7 @@
         "@babel/core": "^7.4.3",
         "@babel/preset-env": "^7.4.3",
         "aws-sdk-mock": "^4.4.0",
+        "eslint": "^5.16.0",
         "gulp": "^3.9.1",
         "gulp-babel": "^8.0.0",
         "gulp-sourcemaps": "^2.6.5",

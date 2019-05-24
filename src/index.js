@@ -1,5 +1,4 @@
 const ssmReader = require('./ssmReader');
-const forceSync = require('sync-rpc');
 const jsonifier = require('./utils/jsonifier');
 
 const ssmGetJsonifiedAsync = (region, pathPrefix, callback) => {
@@ -11,19 +10,17 @@ const ssmGetJsonifiedAsync = (region, pathPrefix, callback) => {
                     resolve(jsonifier.hierachicalToJson(data, pathPrefix));
                 })
                 .catch(err => {
-                    reject(err);
-                })
+                    reject({ error: err });
+                });
         });
-    } else {
-        ssmReader.ssmOutputToJson(region, pathPrefix)
-            .then(data => {
-                return callback(null, jsonifier.hierachicalToJson(data, pathPrefix));
-            })
-            .catch(err => {
-                return callback(true, err);
-            })
     }
-}
+
+    ssmReader.ssmOutputToJson(region, pathPrefix)
+        .then(data =>
+            callback(null, jsonifier.hierachicalToJson(data, pathPrefix))
+        )
+        .catch(err => callback(true, { error: err }));
+};
 
 const ssmGetJsonifiedSync = (region, pathPrefix) => {
     let done = false;
@@ -32,9 +29,9 @@ const ssmGetJsonifiedSync = (region, pathPrefix) => {
         data = jsonifier.hierachicalToJson(res, pathPrefix);
         done = true;
     });
-    require('deasync').loopWhile(function() { return !done; });
+    require('deasync').loopWhile(function () { return !done; });
     return data;
-}
+};
 
 module.exports = {
     ssmGetJsonifiedAsync: ssmGetJsonifiedAsync,

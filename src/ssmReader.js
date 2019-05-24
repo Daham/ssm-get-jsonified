@@ -11,15 +11,10 @@ const ssmOutputToJson = (region, pathPrefix) => {
 
     return new Promise((resolve, reject) => {
         getParametersByPathPromise
-            .then(function(hierachicalOutput) {
-                return resolve(hierachicalOutput);
-            })
-            .catch(function(err) {
-                return reject();
-            });
-    })
-
-}
+            .then(resolve)
+            .catch(reject);
+    });
+};
 
 const ssmOutputToJsonAsync = (region, pathPrefix, callback) => {
 
@@ -29,10 +24,10 @@ const ssmOutputToJsonAsync = (region, pathPrefix, callback) => {
     const params = { Path: pathPrefix, Recursive: true, WithDecryption: true };
 
     ssm.getParametersByPath(params, (err, hierachicalOutput) => {
-        if (err) throw err
-        return callback(hierachicalOutput)
+        if (err) return callback({ error: err });
+        return callback(hierachicalOutput);
     });
-}
+};
 
 
 module.exports = {

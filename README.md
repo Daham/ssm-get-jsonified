@@ -124,9 +124,31 @@ To install the stable version:
 ```console
     $ npm install ssm-get-jsonified
 ```
+
+## Setting AWS Credentials
+
+Set credentials in the AWS credentials profile file on your local system, located at:
+
+`~/.aws/credentials` on Linux, macOS, or Unix
+
+`C:\Users\USERNAME\.aws\credentials` on Windows
+
+This file should contain lines in the following format:
+
+```console
+[default]
+aws_access_key_id = your_access_key_id
+aws_secret_access_key = your_secret_access_key
+```
+Substitute your own AWS credentials values for the values your_access_key_id and your_secret_access_key.
+
 ## Usage
 
+### Fetch Configurations Asynchronously
+
 To get database configurations in `/myApp/prod/dbConfigs`
+
+#### Using Callbacks
 
 ```js
     const ssmJsonified = require('ssm-get-jsonified');
@@ -146,9 +168,33 @@ To get database configurations in `/myApp/prod/dbConfigs`
          *  */ 
     });
 ```
+#### Using Promises
+
+```js
+ssmJsonified.ssmGetJsonifiedAsync('us-west-2', '/myApp/prod/salesforce')
+    .then(configuration => {
+        // Logic to process required configuration
+
+        // configuration - configurations in path prefix onwards.
+        /**
+         * {
+         *       "password": "complexPasswprd",
+         *       "url": "dbUrl",
+         *       "username": "myDBUser"
+         *   }
+         * 
+         *  */ 
+    })
+    .catch((err) => {
+        
+    })
+
+```
+
 
 To get database configurations in `/myApp/prod/salesforce`
 
+#### Using Callbacks
 ```js
     const ssmJsonified = require('ssm-get-jsonified');
 
@@ -170,6 +216,68 @@ To get database configurations in `/myApp/prod/salesforce`
          *  */ 
     });
 ```
+#### Using Promises
+
+```js
+ssmJsonified.ssmGetJsonifiedAsync('us-west-2', '/myApp/prod/salesforce')
+    .then(configuration => {
+         // Logic to process required configuration
+
+        // configuration - configurations in path prefix onwards.
+        /**
+         * {
+         *       "loginUrl": "sfLoginUrl",
+         *       "password": "sfLoginPassword",
+         *       "sso": {
+         *                "entityId": *"sfSSOEntityId",
+         *                "redirectUrl": *"sfSSORedirectUrl"
+         *               },
+         *       "username": "sfLoginUserName"
+         *   }
+         *  */ 
+    })
+    .catch((err) => {
+        
+    })
+
+```
+
+### Fetch Configurations Synchronously
+
+To get database configurations in `/myApp/prod/dbConfigs`
+```js
+let configuration = smJsonified.ssmGetJsonifiedSync('us-west-2', '/myApp/prod/salesforce')
+
+  // configuration - configurations in path prefix onwards.
+        /**
+         * {
+         *       "password": "complexPasswprd",
+         *       "url": "dbUrl",
+         *       "username": "myDBUser"
+         *   }
+         * 
+         *  */ 
+```
+
+To get database configurations in `/myApp/prod/salesforce`
+
+```js
+let configuration = smJsonified.ssmGetJsonifiedSync('us-west-2', '/myApp/prod/salesforce')
+
+ // configuration - configurations in path prefix onwards.
+        /**
+         * {
+         *       "loginUrl": "sfLoginUrl",
+         *       "password": "sfLoginPassword",
+         *       "sso": {
+         *                "entityId": *"sfSSOEntityId",
+         *                "redirectUrl": *"sfSSORedirectUrl"
+         *               },
+         *       "username": "sfLoginUserName"
+         *   }
+         *  */ 
+```
+
 ## License
 
     MIT License

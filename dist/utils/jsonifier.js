@@ -1,5 +1,21 @@
-var paramJson = {};
-var ref;
+const paramJson = {};
+let ref;
+
+const recursiveJson = (value, keyArray) => {
+  const currKey = keyArray.shift();
+
+  if (!keyArray.length) {
+    ref[currKey] = value;
+    return;
+  }
+
+  if (!ref[currKey]) {
+    ref[currKey] = {};
+  }
+
+  ref = ref[currKey];
+  return recursiveJson(value, keyArray);
+};
 
 const hierachicalToJson = (hierachicalOutput, pathPrefix) => {
   const skipCount = pathPrefix.split('/')[1] === '' ? 1 : pathPrefix.split('/').length;
@@ -10,22 +26,6 @@ const hierachicalToJson = (hierachicalOutput, pathPrefix) => {
     recursiveJson(param.Value, keyArray);
   });
   return paramJson;
-};
-
-const recursiveJson = (value, keyArray) => {
-  var currKey = keyArray.shift();
-
-  if (!keyArray.length) {
-    ref[currKey] = value;
-    return;
-  } else {
-    if (!ref[currKey]) {
-      ref[currKey] = {};
-    }
-
-    ref = ref[currKey];
-    return recursiveJson(value, keyArray);
-  }
 };
 
 module.exports = {

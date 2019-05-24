@@ -1,7 +1,5 @@
 const ssmReader = require('./ssmReader');
 
-const forceSync = require('sync-rpc');
-
 const jsonifier = require('./utils/jsonifier');
 
 const ssmGetJsonifiedAsync = (region, pathPrefix, callback) => {
@@ -10,16 +8,16 @@ const ssmGetJsonifiedAsync = (region, pathPrefix, callback) => {
       ssmReader.ssmOutputToJson(region, pathPrefix).then(data => {
         resolve(jsonifier.hierachicalToJson(data, pathPrefix));
       }).catch(err => {
-        reject(err);
+        reject({
+          error: err
+        });
       });
     });
   }
 
-  ssmReader.ssmOutputToJson(region, pathPrefix).then(data => {
-    return callback(null, jsonifier.hierachicalToJson(data, pathPrefix));
-  }).catch(err => {
-    return callback(true, err);
-  });
+  ssmReader.ssmOutputToJson(region, pathPrefix).then(data => callback(null, jsonifier.hierachicalToJson(data, pathPrefix))).catch(err => callback(true, {
+    error: err
+  }));
 };
 
 const ssmGetJsonifiedSync = (region, pathPrefix) => {
@@ -40,18 +38,15 @@ const ssmGetJsonifiedSync = (region, pathPrefix) => {
 module.exports = {
   ssmGetJsonifiedAsync: ssmGetJsonifiedAsync,
   ssmGetJsonifiedSync: ssmGetJsonifiedSync
-};
-console.log('start');
+}; // console.log('start')
+
 ssmGetJsonifiedAsync('us-west-2', '/myApp/prod/salesforce').then(data => {
   console.log(data);
 }).catch(err => {
   console.log(err);
-});
-ssmGetJsonifiedAsync('us-west-2', '/myApp/prod/salesforce', (err, data) => {
-  if (err) {
-    console.log(err);
-  }
+}); // console.log('end')
 
-  console.log(data);
-});
-console.log('end');
+console.log('===========');
+console.log('start1'); //console.log(ssmJsonified.ssmGetJsonifiedSync('us-west-2', '/myApp/prod/salesforce'))
+
+console.log('end1');

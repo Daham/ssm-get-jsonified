@@ -12,11 +12,7 @@ const ssmOutputToJson = (region, pathPrefix) => {
   };
   const getParametersByPathPromise = ssm.getParametersByPath(params).promise();
   return new Promise((resolve, reject) => {
-    getParametersByPathPromise.then(function (hierachicalOutput) {
-      return resolve(hierachicalOutput);
-    }).catch(function (err) {
-      return reject();
-    });
+    getParametersByPathPromise.then(resolve).catch(reject);
   });
 };
 
@@ -31,7 +27,9 @@ const ssmOutputToJsonAsync = (region, pathPrefix, callback) => {
     WithDecryption: true
   };
   ssm.getParametersByPath(params, (err, hierachicalOutput) => {
-    if (err) throw err;
+    if (err) return callback({
+      error: err
+    });
     return callback(hierachicalOutput);
   });
 };

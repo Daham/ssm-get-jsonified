@@ -1,12 +1,9 @@
-var indexFile = require('../src/index');
-var ssmReader = require('../src/ssmReader');
-var testConstants = require('./testConstants');
-//var AWS = require('aws-sdk-mock');
-const AWS = require('aws-sdk')
-var sinon = require('sinon');
+const indexFile = require('../src/index');
+const ssmReader = require('../src/ssmReader');
+const AWS = require('aws-sdk');
 
 afterEach(() => {
-    //AWS.restore('SSM', 'getParametersByPath');
+    jest.restoreAllMocks();
 });
 
 describe('ssmGetJsonifiedAsync', () => {
@@ -20,7 +17,6 @@ describe('ssmGetJsonifiedAsync', () => {
         const data = await indexFile.ssmGetJsonifiedAsync('us-west-2', '/')
         expect(typeof data).toEqual('object');
 
-        // Validate simple property types.
         expect(typeof data.myApp).toEqual('object');
         expect(typeof data.myApp.platformConfigs).toEqual('object');
         expect(typeof data.myApp.platformConfigs.salesforce).toEqual('object');
@@ -39,7 +35,6 @@ describe('ssmGetJsonifiedAsync', () => {
         const data = await indexFile.ssmGetJsonifiedAsync('us-west-2', '/myApp')
         expect(typeof data).toEqual('object');
 
-        // Validate simple property types.
         expect(typeof data.platformConfigs).toEqual('object');
         expect(typeof data.platformConfigs.salesforce).toEqual('object');
         expect(typeof data.platformConfigs.salesforce.saml).toEqual('object');
@@ -57,7 +52,6 @@ describe('ssmGetJsonifiedAsync', () => {
         const data = await indexFile.ssmGetJsonifiedAsync('us-west-2', '/myApp/platformConfigs')
         expect(typeof data).toEqual('object');
 
-        // Validate simple property types.
         expect(typeof data.salesforce).toEqual('object');
         expect(typeof data.salesforce.saml).toEqual('object');
         expect(typeof data.salesforce.sso).toEqual('object');
@@ -69,13 +63,20 @@ describe('ssmGetJsonifiedAsync', () => {
 
     });
 
-    // test('throws on ssm parameters retrieval', () => {
-    //     const ssmOutputToJsonSpy = jest.spyOn(AWS.SSM, 'getParametersByPath').mockImplementation(() => {
-    //         throw new Error();
-    //     });
+    test('throws on ssm parameters retrieval', async() => {
 
-    //     expect(ssmOutputToJsonSpy).toThrow();
-    // });
+        const ssm = new AWS.SSM({ region: 'us-west-2' });
+        const getParametersByPathMock = jest.fn()
+            .mockImplementationOnce(cb => cb(true, { error: 'Error fetching from AWS ssm' }));
+        ssm.getParametersByPath = getParametersByPathMock;
+
+        try {
+            await indexFile.ssmGetJsonifiedAsync('us-west-2', '/myApp/platformConfigs')
+        } catch (object) {
+            expect(getParametersByPathMock).toHaveBeenCalledWith({ Path: '/myApp/platformConfigs', Recursive: true, WithDecryption: true });
+            expect(object.error).toEqual('Error fetching from AWS ssm');
+        }
+    });
 });
 
 describe('ssmGetJsonifiedSync', () => {
