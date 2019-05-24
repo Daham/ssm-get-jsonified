@@ -1,20 +1,37 @@
 const indexFile = require('../src/index');
 const ssmReader = require('../src/ssmReader');
-const AWS = require('aws-sdk');
+const testConstants = require('./testConstants');
+//const AWS = require('aws-sdk');
+const AWS = require('aws-sdk-mock');
 
-afterEach(() => {
+beforeAll(() => {
+    AWS.mock('SSM', 'getParametersByPath', function(params, callback) {
+        if (params.Recursive && params.WithDecryption) {
+            if (params.Path === '/') {
+                return callback(null, testConstants.hierachicalSSMOutputRoot);
+            } else if (params.Path === '/myApp') {
+                return callback(null, testConstants.hierachicalSSMOutputNextToRoot);
+            } else if (params.Path === '/myApp/platformConfigs') {
+                return callback(null, testConstants.hierachicalSSMOutputModerate);
+            } else {
+                throw new Error('Unknown Path');
+            }
+        }
+        throw new Error('Invalid Params');
+    });
+});
+
+afterAll(() => {
     jest.restoreAllMocks();
+    AWS.restore('SSM', 'getParametersByPath');
 });
 
 describe('ssmGetJsonifiedAsync', () => {
-    test('is called with necessary parameters', async() => {
-        const ssmOutputToJsonSpy = jest.spyOn(ssmReader, 'ssmOutputToJson');
-        await indexFile.ssmGetJsonifiedAsync('us-west-2', '/any/given/path');
-        expect(ssmOutputToJsonSpy).toHaveBeenCalledWith('us-west-2', '/any/given/path');
-    });
 
     test('gets parameters from ssm for a given path prefix of an root location in hierachical json format', async() => {
-        const data = await indexFile.ssmGetJsonifiedAsync('us-west-2', '/')
+
+        const data = await indexFile.ssmGetJsonifiedAsync('us-west-2', '/');
+
         expect(typeof data).toEqual('object');
 
         expect(typeof data.myApp).toEqual('object');
@@ -32,7 +49,8 @@ describe('ssmGetJsonifiedAsync', () => {
 
     test('gets parameters from ssm for a given path prefix of a next to root location in hierachical json format', async() => {
 
-        const data = await indexFile.ssmGetJsonifiedAsync('us-west-2', '/myApp')
+        const data = await indexFile.ssmGetJsonifiedAsync('us-west-2', '/myApp');
+
         expect(typeof data).toEqual('object');
 
         expect(typeof data.platformConfigs).toEqual('object');
@@ -49,7 +67,8 @@ describe('ssmGetJsonifiedAsync', () => {
 
     test('gets parameters from ssm for a given path prefix of an intermediate location in hierachical json format', async() => {
 
-        const data = await indexFile.ssmGetJsonifiedAsync('us-west-2', '/myApp/platformConfigs')
+        const data = await indexFile.ssmGetJsonifiedAsync('us-west-2', '/myApp/platformConfigs');
+
         expect(typeof data).toEqual('object');
 
         expect(typeof data.salesforce).toEqual('object');
@@ -64,16 +83,10 @@ describe('ssmGetJsonifiedAsync', () => {
     });
 
     test('throws on ssm parameters retrieval', async() => {
-
-        const ssm = new AWS.SSM({ region: 'us-west-2' });
-        const getParametersByPathMock = jest.fn()
-            .mockImplementationOnce(cb => cb(true, { error: 'Error fetching from AWS ssm' }));
-        ssm.getParametersByPath = getParametersByPathMock;
-
         try {
-            await indexFile.ssmGetJsonifiedAsync('us-west-2', '/myApp/platformConfigs')
+            await indexFile.ssmGetJsonifiedAsync('false-region', '/myApp/platformConfigs')
         } catch (object) {
-            expect(getParametersByPathMock).toHaveBeenCalledWith({ Path: '/myApp/platformConfigs', Recursive: true, WithDecryption: true });
+            expect(getParametersByPathMock).toHaveBeenCalledWith([{ Path: '/myApp/platformConfigs', Recursive: true, WithDecryption: true }]);
             expect(object.error).toEqual('Error fetching from AWS ssm');
         }
     });
