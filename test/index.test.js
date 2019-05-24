@@ -22,7 +22,6 @@ beforeAll(() => {
 });
 
 afterAll(() => {
-    jest.restoreAllMocks();
     AWS.restore('SSM', 'getParametersByPath');
 });
 

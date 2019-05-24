@@ -180,7 +180,8 @@
 <a name='L132'></a><a href='#L132'>132</a>
 <a name='L133'></a><a href='#L133'>133</a>
 <a name='L134'></a><a href='#L134'>134</a>
-<a name='L135'></a><a href='#L135'>135</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -224,7 +225,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -268,7 +269,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -312,149 +313,151 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">var hierachicalSSMOutputRoot = {
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const hierachicalSSMOutputRoot = {
     "Parameters": [{
-            "Name": "/myApp/platformConfigs/salesforce/saml/password",
-            "Type": "SecureString",
-            "Value": "SecretPassword",
-            "Version": 1,
-            "LastModifiedDate": "2019-05-18T05:48:44.213Z",
-            "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/saml/password"
-        },
-        {
-            "Name": "/myApp/platformConfigs/salesforce/saml/sso/url",
-            "Type": "String",
-            "Value": "LoginUrl",
-            "Version": 1,
-            "LastModifiedDate": "2019-05-18T05:49:19.228Z",
-            "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/saml/sso/url"
-        },
-        {
-            "Name": "/myApp/platformConfigs/salesforce/saml/username",
-            "Type": "String",
-            "Value": "name",
-            "Version": 1,
-            "LastModifiedDate": "2019-05-18T05:48:13.288Z",
-            "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/saml/username"
-        },
-        {
-            "Name": "/myApp/platformConfigs/salesforce/sso/loginUrl",
-            "Type": "String",
-            "Value": "Url",
-            "Version": 1,
-            "LastModifiedDate": "2019-05-18T05:47:06.615Z",
-            "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/sso/loginUrl"
-        },
-        {
-            "Name": "/myApp/platformConfigs/salesforce/sso/password",
-            "Type": "SecureString",
-            "Value": "SecretPassword",
-            "Version": 1,
-            "LastModifiedDate": "2019-05-18T05:44:31.745Z",
-            "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/sso/password"
-        }
+        "Name": "/myApp/platformConfigs/salesforce/saml/password",
+        "Type": "SecureString",
+        "Value": "SecretPassword",
+        "Version": 1,
+        "LastModifiedDate": "2019-05-18T05:48:44.213Z",
+        "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/saml/password"
+    },
+    {
+        "Name": "/myApp/platformConfigs/salesforce/saml/sso/url",
+        "Type": "String",
+        "Value": "LoginUrl",
+        "Version": 1,
+        "LastModifiedDate": "2019-05-18T05:49:19.228Z",
+        "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/saml/sso/url"
+    },
+    {
+        "Name": "/myApp/platformConfigs/salesforce/saml/username",
+        "Type": "String",
+        "Value": "name22",
+        "Version": 1,
+        "LastModifiedDate": "2019-05-18T05:48:13.288Z",
+        "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/saml/username"
+    },
+    {
+        "Name": "/myApp/platformConfigs/salesforce/sso/loginUrl",
+        "Type": "String",
+        "Value": "Url",
+        "Version": 1,
+        "LastModifiedDate": "2019-05-18T05:47:06.615Z",
+        "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/sso/loginUrl"
+    },
+    {
+        "Name": "/myApp/platformConfigs/salesforce/sso/password",
+        "Type": "SecureString",
+        "Value": "SecretPassword",
+        "Version": 1,
+        "LastModifiedDate": "2019-05-18T05:44:31.745Z",
+        "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/sso/password"
+    }
     ]
 };
 &nbsp;
-var hierachicalSSMOutputNextToRoot = {
+const hierachicalSSMOutputNextToRoot = {
     "Parameters": [{
-            "Name": "/myApp/platformConfigs/salesforce/saml/password",
-            "Type": "SecureString",
-            "Value": "SecretPassword",
-            "Version": 1,
-            "LastModifiedDate": "2019-05-18T05:48:44.213Z",
-            "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/saml/password"
-        },
-        {
-            "Name": "/myApp/platformConfigs/salesforce/saml/sso/url",
-            "Type": "String",
-            "Value": "LoginUrl",
-            "Version": 1,
-            "LastModifiedDate": "2019-05-18T05:49:19.228Z",
-            "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/saml/sso/url"
-        },
-        {
-            "Name": "/myApp/platformConfigs/salesforce/saml/username",
-            "Type": "String",
-            "Value": "name",
-            "Version": 1,
-            "LastModifiedDate": "2019-05-18T05:48:13.288Z",
-            "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/saml/username"
-        },
-        {
-            "Name": "/myApp/platformConfigs/salesforce/sso/loginUrl",
-            "Type": "String",
-            "Value": "Url",
-            "Version": 1,
-            "LastModifiedDate": "2019-05-18T05:47:06.615Z",
-            "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/sso/loginUrl"
-        },
-        {
-            "Name": "/myApp/platformConfigs/salesforce/sso/password",
-            "Type": "SecureString",
-            "Value": "SecretPassword",
-            "Version": 1,
-            "LastModifiedDate": "2019-05-18T05:44:31.745Z",
-            "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/sso/password"
-        }
+        "Name": "/myApp/platformConfigs/salesforce/saml/password",
+        "Type": "SecureString",
+        "Value": "SecretPassword",
+        "Version": 1,
+        "LastModifiedDate": "2019-05-18T05:48:44.213Z",
+        "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/saml/password"
+    },
+    {
+        "Name": "/myApp/platformConfigs/salesforce/saml/sso/url",
+        "Type": "String",
+        "Value": "LoginUrl",
+        "Version": 1,
+        "LastModifiedDate": "2019-05-18T05:49:19.228Z",
+        "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/saml/sso/url"
+    },
+    {
+        "Name": "/myApp/platformConfigs/salesforce/saml/username",
+        "Type": "String",
+        "Value": "name",
+        "Version": 1,
+        "LastModifiedDate": "2019-05-18T05:48:13.288Z",
+        "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/saml/username"
+    },
+    {
+        "Name": "/myApp/platformConfigs/salesforce/sso/loginUrl",
+        "Type": "String",
+        "Value": "Url",
+        "Version": 1,
+        "LastModifiedDate": "2019-05-18T05:47:06.615Z",
+        "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/sso/loginUrl"
+    },
+    {
+        "Name": "/myApp/platformConfigs/salesforce/sso/password",
+        "Type": "SecureString",
+        "Value": "SecretPassword",
+        "Version": 1,
+        "LastModifiedDate": "2019-05-18T05:44:31.745Z",
+        "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/sso/password"
+    }
     ]
 };
 &nbsp;
-var hierachicalSSMOutputModerate = {
+const hierachicalSSMOutputModerate = {
     "Parameters": [{
-            "Name": "/myApp/platformConfigs/salesforce/saml/password",
-            "Type": "SecureString",
-            "Value": "SecretPassword",
-            "Version": 1,
-            "LastModifiedDate": "2019-05-18T05:48:44.213Z",
-            "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/saml/password"
-        },
-        {
-            "Name": "/myApp/platformConfigs/salesforce/saml/sso/url",
-            "Type": "String",
-            "Value": "LoginUrl",
-            "Version": 1,
-            "LastModifiedDate": "2019-05-18T05:49:19.228Z",
-            "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/saml/sso/url"
-        },
-        {
-            "Name": "/myApp/platformConfigs/salesforce/saml/username",
-            "Type": "String",
-            "Value": "name",
-            "Version": 1,
-            "LastModifiedDate": "2019-05-18T05:48:13.288Z",
-            "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/saml/username"
-        },
-        {
-            "Name": "/myApp/platformConfigs/salesforce/sso/loginUrl",
-            "Type": "String",
-            "Value": "Url",
-            "Version": 1,
-            "LastModifiedDate": "2019-05-18T05:47:06.615Z",
-            "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/sso/loginUrl"
-        },
-        {
-            "Name": "/myApp/platformConfigs/salesforce/sso/password",
-            "Type": "SecureString",
-            "Value": "SecretPassword",
-            "Version": 1,
-            "LastModifiedDate": "2019-05-18T05:44:31.745Z",
-            "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/sso/password"
-        }
+        "Name": "/myApp/platformConfigs/salesforce/saml/password",
+        "Type": "SecureString",
+        "Value": "SecretPassword",
+        "Version": 1,
+        "LastModifiedDate": "2019-05-18T05:48:44.213Z",
+        "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/saml/password"
+    },
+    {
+        "Name": "/myApp/platformConfigs/salesforce/saml/sso/url",
+        "Type": "String",
+        "Value": "LoginUrl",
+        "Version": 1,
+        "LastModifiedDate": "2019-05-18T05:49:19.228Z",
+        "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/saml/sso/url"
+    },
+    {
+        "Name": "/myApp/platformConfigs/salesforce/saml/username",
+        "Type": "String",
+        "Value": "name",
+        "Version": 1,
+        "LastModifiedDate": "2019-05-18T05:48:13.288Z",
+        "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/saml/username"
+    },
+    {
+        "Name": "/myApp/platformConfigs/salesforce/sso/loginUrl",
+        "Type": "String",
+        "Value": "Url",
+        "Version": 1,
+        "LastModifiedDate": "2019-05-18T05:47:06.615Z",
+        "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/sso/loginUrl"
+    },
+    {
+        "Name": "/myApp/platformConfigs/salesforce/sso/password",
+        "Type": "SecureString",
+        "Value": "SecretPassword",
+        "Version": 1,
+        "LastModifiedDate": "2019-05-18T05:44:31.745Z",
+        "ARN": "arn:aws:ssm:us-west-2:429869777392:parameter/myApp/platformConfigs/salesforce/sso/password"
+    }
     ]
 };
 &nbsp;
 exports.hierachicalSSMOutputRoot = hierachicalSSMOutputRoot;
 exports.hierachicalSSMOutputNextToRoot = hierachicalSSMOutputNextToRoot;
-exports.hierachicalSSMOutputModerate = hierachicalSSMOutputModerate;</pre></td></tr>
+exports.hierachicalSSMOutputModerate = hierachicalSSMOutputModerate;
+&nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri May 24 2019 12:03:00 GMT+0530 (+0530)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri May 24 2019 16:14:18 GMT+0530 (+0530)
 </div>
 </div>
 <script src="../prettify.js"></script>
