@@ -1,4 +1,4 @@
-# <img src='https://imgur.com/dlN0Jne' height='100'></a>
+# <img src='https://i.imgur.com/dlN0Jne.png' height='100'></a>
 
 
 [![Build Status](https://travis-ci.com/Daham/ssm-get-jsonified.svg?branch=master)](https://travis-ci.com/Daham/ssm-get-jsonified.svg?branch=master) 
