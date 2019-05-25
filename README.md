@@ -1,4 +1,5 @@
-# ssm-get-jsonified
+# <img src='https://imgur.com/dlN0Jne' height='100'></a>
+
 
 [![Build Status](https://travis-ci.com/Daham/ssm-get-jsonified.svg?branch=master)](https://travis-ci.com/Daham/ssm-get-jsonified.svg?branch=master) 
 [![Coverage Status](https://coveralls.io/repos/github/Daham/ssm-get-jsonified/badge.svg?branch=master)](https://coveralls.io/github/Daham/ssm-get-jsonified?branch=master)
