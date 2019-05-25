@@ -253,7 +253,7 @@ ssmJsonified.ssmGetJsonifiedAsync('us-west-2', '/myApp/prod/salesforce')
 
 To get database configurations in `/myApp/prod/dbConfigs`
 ```js
-let configuration = smJsonified.ssmGetJsonifiedSync('us-west-2', '/myApp/prod/salesforce')
+let configuration = ssmJsonified.ssmGetJsonifiedSync('us-west-2', '/myApp/prod/salesforce')
 
   // configuration - configurations in path prefix onwards.
         /**
@@ -269,7 +269,7 @@ let configuration = smJsonified.ssmGetJsonifiedSync('us-west-2', '/myApp/prod/sa
 To get database configurations in `/myApp/prod/salesforce`
 
 ```js
-let configuration = smJsonified.ssmGetJsonifiedSync('us-west-2', '/myApp/prod/salesforce')
+let configuration = ssmJsonified.ssmGetJsonifiedSync('us-west-2', '/myApp/prod/salesforce')
 
  // configuration - configurations in path prefix onwards.
         /**
